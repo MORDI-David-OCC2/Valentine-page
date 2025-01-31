@@ -99,7 +99,13 @@
       const message = document.getElementById('newMessage').value.trim();
 
       if (recipient && password && message) {
-        set(ref(database, 'messages/' + recipient), {
+        const recipientRef = ref(database, 'messages/' + recipient);
+
+        // Création d'un nouvel ID unique pour le message
+        const messageId = new Date().getTime().toString(); // Utilisation de l'heure actuelle pour générer un ID unique
+
+        // Ajouter le message avec le mot de passe unique
+        set(ref(database, 'messages/' + recipient + '/' + messageId), {
           password: password,
           message: message
         }).then(() => {
@@ -123,15 +129,22 @@
       const dbRef = ref(database);
       get(child(dbRef, 'messages/' + target)).then((snapshot) => {
         if (snapshot.exists()) {
-          const data = snapshot.val();
-          if (data.password === passwordInput) {
-            roseDiv.style.display = 'block';
-            setTimeout(() => {
-              roseDiv.style.display = 'none';
-              messageDiv.innerHTML = `💌 ${data.message}`;
-              messageDiv.style.display = 'block';
-            }, 3000);
-          } else {
+          let messageFound = false;
+          snapshot.forEach((messageSnapshot) => {
+            const data = messageSnapshot.val();
+            if (data.password === passwordInput) {
+              roseDiv.style.display = 'block';
+              setTimeout(() => {
+                roseDiv.style.display = 'none';
+                messageDiv.innerHTML = `💌 ${data.message}`;
+                messageDiv.style.display = 'block';
+              }, 3000);
+              messageFound = true;
+              return true; // Exit the loop
+            }
+          });
+
+          if (!messageFound) {
             messageDiv.innerHTML = "❌ Mot de passe incorrect !";
             messageDiv.style.display = 'block';
           }
