@@ -4,7 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page de Saint-Valentin</title>
+  <div id="customAnimation" class="hidden">
+    <video id="animationVideo" width="400" height="300" autoplay>
+      <source src="ACM.mp4" type="video/mp4">
+    </video>
+  </div>  
   <style>
+    #customAnimation {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 300px;
+      display: none;
+      z-index: 1000;
+      background: rgb(255, 255, 255); /* Slight dark background */
+      padding: 10px;
+      border-radius: 10px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    #animationVideo {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    
     body {
       font-family: 'Dancing Script', cursive;
       text-align: center;
@@ -109,7 +138,17 @@
           password: password,
           message: message
         }).then(() => {
-          alert(`💖 Message créé pour ${recipient} !`);
+          const animationDiv = document.getElementById('customAnimation');
+          const animationVideo = document.getElementById('animationVideo');
+        
+          // Show the animation
+          animationDiv.style.display = 'block';
+          animationVideo.play();
+        
+          // Hide animation when the video ends
+          animationVideo.onended = function() {
+            animationDiv.style.display = 'none';
+          };
         }).catch(error => {
           console.error("Erreur : ", error);
         });
