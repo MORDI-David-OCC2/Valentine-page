@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page de Saint-Valentin</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.10.0/dist/email.min.js"></script>
+
   <div id="customAnimation" class="hidden">
     <video id="animationVideo" width="400" height="300" autoplay>
       <source src="ACM.mp4" type="video/mp4">
@@ -128,14 +130,14 @@
     // 📌 Initialisation Firebase
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-
+    emailjs.init("EerYy8lVdytZqhnNC");  // Replace "YOUR_PUBLIC_KEY" with your actual EmailJS public key.
     // 💌 Création d’un message
     document.getElementById('createMessageForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       const recipient = document.getElementById('recipient').value.trim();
       const password = document.getElementById('newPassword').value.trim();
       const message = document.getElementById('newMessage').value.trim();
-
+      const email = document.getElementById('email').value.trim();
       if (recipient && password && message) {
         const recipientRef = ref(database, 'messages/' + recipient);
 
@@ -147,6 +149,24 @@
           password: password,
           message: message
         }).then(() => {
+          // EmailJS template parameters
+const templateParams = {
+  to_email: email,                  // Email of the recipient
+  recipient: recipient,             // Name of the recipient
+  message: message,                 // The secret message
+  password: password,               // Password for accessing the message
+  link: `https://secret-valentine.netlify.app/` // Link to your message page (customize this)
+};
+
+// Send the email
+emailjs.send('service_gnvcx5e', 'template_las7qol', templateParams)
+  .then(() => {
+    alert('E-mail envoyé avec succès au destinataire !');
+  })
+  .catch(error => {
+    console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
+  });
+
           const animationDiv = document.getElementById('customAnimation');
           const animationVideo = document.getElementById('animationVideo');
         
@@ -212,6 +232,7 @@
   <h2>🌹 Crée ton message</h2>
   <form id="createMessageForm">
     <input type="text" id="recipient" placeholder="Nom du destinataire" required>
+    <input type="email" id="email" placeholder="Adresse e-mail du destinataire" required>
     <input type="password" id="newPassword" placeholder="Mot de passe" required>
     <input type="text" id="newMessage" placeholder="Votre message" required>
     <button type="submit">Créer 💌</button>
