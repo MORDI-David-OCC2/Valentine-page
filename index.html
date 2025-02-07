@@ -151,7 +151,8 @@
         }).then(() => {
           // EmailJS template parameters
 const templateParams = {
-  to_email: email,                  // Email of the recipient
+  to_email: email,
+  from_name: "Secret Valentine",                  // Email of the recipient
   recipient: recipient,             // Name of the recipient
   message: message,                 // The secret message
   password: password,               // Password for accessing the message
@@ -159,7 +160,7 @@ const templateParams = {
 };
 
 // Send the email
-emailjs.send('service_o9r4ypn', 'template_las7qol', templateParams)
+emailjs.send('service_ros51bx', 'template_q89lj9b', templateParams)
   .then(() => {
     alert('E-mail envoyé avec succès au destinataire !');
   })
