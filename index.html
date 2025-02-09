@@ -137,7 +137,7 @@
     // 📌 Initialisation Firebase
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-    emailjs.init("EerYy8lVdytZqhnNC");  // Replace "YOUR_PUBLIC_KEY" with your actual EmailJS public key.
+    emailjs.init("tBq9tvEuD9XKUu0XI");  // Replace "YOUR_PUBLIC_KEY" with your actual EmailJS public key.
     // 💌 Création d’un message
     document.getElementById('createMessageForm').addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -167,7 +167,7 @@ const templateParams = {
 };
 
 // Send the email
-emailjs.send('service_gnvcx5e', 'template_q89lj9b', templateParams)
+emailjs.send('service_60uzpng', 'template_z1jvuel', templateParams)
   .then(() => {
     alert('E-mail envoyé avec succès au destinataire !');
   })
