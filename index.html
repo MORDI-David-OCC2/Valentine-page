@@ -9,6 +9,13 @@
   <div id="customAnimation" class="hidden">
     <video id="animationVideo" width="400" height="300" autoplay>
       <source src="ACM.mp4" type="video/mp4">
+      <source src="AOM Djibril.mp4" type="video/mp4">
+      <source src="AOM Emilie.mp4" type="video/mp4">
+      <source src="AOM Fabien.mp4" type="video/mp4">
+      <source src="AOM Rayan.mp4" type="video/mp4">
+      <source src="AOM Ryu.mp4" type="video/mp4">
+      <source src="AOM Ulysse.mp4" type="video/mp4">
+      <source src="AOM Wiam.mp4" type="video/mp4">
     </video>
   </div>  
   <style>
@@ -188,43 +195,74 @@ emailjs.send('service_gnvcx5e', 'template_q89lj9b', templateParams)
     });
 
     // 🔐 Récupération d’un message
-    document.getElementById('passwordForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
-      const target = document.getElementById('target').value.trim();
-      const passwordInput = document.getElementById('password').value.trim();
-      const messageDiv = document.getElementById('message');
-      const roseDiv = document.getElementById('roseAnimation');
+    // 🔐 Récupération d’un message avec animation personnalisée
+document.getElementById('passwordForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const target = document.getElementById('target').value.trim();
+  const passwordInput = document.getElementById('password').value.trim();
+  const messageDiv = document.getElementById('message');
+  const roseDiv = document.getElementById('roseAnimation');
+  const animationDiv = document.getElementById('customAnimation');
+  const animationVideo = document.getElementById('animationVideo');
 
-      const dbRef = ref(database);
-      get(child(dbRef, 'messages/' + target)).then((snapshot) => {
-        if (snapshot.exists()) {
-          let messageFound = false;
-          snapshot.forEach((messageSnapshot) => {
-            const data = messageSnapshot.val();
-            if (data.password === passwordInput) {
-              roseDiv.style.display = 'block';
-              setTimeout(() => {
-                roseDiv.style.display = 'none';
-                messageDiv.innerHTML = `💌 ${data.message}`;
-                messageDiv.style.display = 'block';
-              }, 3000);
-              messageFound = true;
-              return true; // Exit the loop
-            }
-          });
+  const dbRef = ref(database);
+  get(child(dbRef, 'messages/' + target)).then((snapshot) => {
+    if (snapshot.exists()) {
+      let messageFound = false;
+      snapshot.forEach((messageSnapshot) => {
+        const data = messageSnapshot.val();
+        if (data.password === passwordInput) {
+          // 🌟 Play Custom Animation Based on Target Name
+          const animations = {
+            "Djibril": "AOM Djibril.mp4",
+            "Emilie": "AOM Emilie.mp4",
+            "Fabien": "AOM Fabien.mp4",
+            "Rayan": "AOM Rayan.mp4",
+            "Ryu": "AOM Ryu.mp4",
+            "Ulysse": "AOM Ulysse.mp4",
+            "Wiam": "AOM Wiam.mp4"
+          };
 
-          if (!messageFound) {
-            messageDiv.innerHTML = "❌ Mot de passe incorrect !";
-            messageDiv.style.display = 'block';
+          if (animations[target]) {
+            animationVideo.src = animations[target];
+            animationDiv.style.display = 'block';
+            animationVideo.play();
+
+            animationVideo.onended = function() {
+              animationDiv.style.display = 'none';
+              // Display message after animation
+              showMessage(data.message);
+            };
+          } else {
+            // If no specific animation, show the message immediately
+            showMessage(data.message);
           }
-        } else {
-          messageDiv.innerHTML = "❌ Message introuvable.";
-          messageDiv.style.display = 'block';
+
+          messageFound = true;
+          return true; // Exit loop
         }
-      }).catch(error => {
-        console.error("Erreur :", error);
       });
-    });
+
+      if (!messageFound) {
+        showMessage("❌ Mot de passe incorrect !");
+      }
+    } else {
+      showMessage("❌ Message introuvable.");
+    }
+  }).catch(error => {
+    console.error("Erreur :", error);
+  });
+
+  function showMessage(msg) {
+    roseDiv.style.display = 'block';
+    setTimeout(() => {
+      roseDiv.style.display = 'none';
+      messageDiv.innerHTML = `💌 ${msg}`;
+      messageDiv.style.display = 'block';
+    }, 3000);
+  }
+});
+
   </script>
 </head>
 <body>
