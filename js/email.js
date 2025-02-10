@@ -1,4 +1,4 @@
-window.emailjs.init("EerYy8lVdytZqhnNC");
+window.emailjs.init("tBq9tvEuD9XKUu0XI");
 
 export function sendEmail(recipient, email, message, password) {
   const templateParams = {
@@ -10,7 +10,7 @@ export function sendEmail(recipient, email, message, password) {
     link: "https://secret-valentine.netlify.app/"
   };
 
-  emailjs.send('service_gnvcx5e', 'template_q89lj9b', templateParams)
+  emailjs.send('service_60uzpng', 'template_z1jvuel', templateParams)
   .then(() => {
     console.log("✅ Email sent successfully!");
   })
