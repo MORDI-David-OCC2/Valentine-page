@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crédits du Projet 💖</title>
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #ffe6e9;
+      color: #a80038;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/tiny-roses.png');
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .credit-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 15px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .member {
+      font-size: 1.8rem;
+      margin: 15px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .member:nth-child(1) { animation-delay: 0.2s; }
+    .member:nth-child(2) { animation-delay: 0.4s; }
+    .member:nth-child(3) { animation-delay: 0.6s; }
+    .member:nth-child(4) { animation-delay: 0.8s; }
+    .member:nth-child(5) { animation-delay: 1s; }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .back-button:hover {
+      background-color: #d90429;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Crédits du Projet 💖</h1>
+
+  <div class="credit-container">
+    <p class="member"><a href="https://www.linkedin.com/in/fleuriane-lam-b6ab66259/" target="_blank">🌹 LAM Fleuriane <br> Co-créatrice du projet/Animations</a></p>
+    <p class="member"><a href="https://www.linkedin.com/in/david-mordi-730128303/" target="_blank">🌹 MORDI David <br> Co-créateur du projet/Implémentation de la page</a></p>
+  </div>
+
+  <button class="back-button" onclick="goBack()">Retour</button>
+
+  <script>
+    function goBack() {
+      window.location.href = "index.html"; // Remplace par la vraie URL de la page principale
+    }
+  </script>
+
+</body>
+</html>
