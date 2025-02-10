@@ -6,7 +6,15 @@ body {
     color: #a80038;
     position: relative;
   }
-  
+
+  .site-logo {
+    width: 100px; /* Ajuste la taille selon tes besoins */
+    height: auto;
+    position: center;
+    top: 10px;
+    left: 10px;
+}
+
   body::before {
     content: "";
     position: absolute;
