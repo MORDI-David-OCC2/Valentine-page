@@ -10,7 +10,7 @@ export function sendEmail(recipient, email, message, password) {
     link: "https://secret-valentine.netlify.app/"
   };
 
-  emailjs.send('service_60uzpng', 'template_z1jvuel', templateParams)
+  emailjs.send('service_5o3c34a', 'template_z1jvuel', templateParams)
   .then(() => {
     console.log("✅ Email sent successfully!");
   })
