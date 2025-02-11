@@ -32,7 +32,7 @@ This page highlights the contributors to the project.
 
 📌 *The animation letter message * 
 
-![Animation page](assets/ACM.mp4)
+![Animation page](https://youtube.com/shorts/LeHNj6pFvjs?feature=share)
  
 
 
