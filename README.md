@@ -5,7 +5,9 @@
 Secret Valentin is a platform that allows to send and view * secrets messages *that can be unlocked with a password* . 
 
 📩Each recipient can access their own message through their name and password
-🎭An *animated credits page* highlights the contributors to the project.
+
+🎭An *animated credits page* 
+This page highlights the contributors to the project.
 
 ##🎥 Video Demo & Screenshots  
 
@@ -23,10 +25,20 @@ Secret Valentin is a platform that allows to send and view * secrets messages *t
 - *Animations*: Procreate
 
 ## 🎨 Screenshots  
-Include images showcasing:  
-📌 *The message creation page*  
-📌 *The message access page*  
+📌 *The message creation page* 
+
+![Creation page](assets/creation_page.png)
+ 
+
+📌 *The animation letter message * 
+
+![Animation page](assets/ACM.mp4)
+ 
+
+
 📌 *The credits page with animations*  
+
+📌 *The animated logo * 
 
 
 
