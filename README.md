@@ -32,13 +32,18 @@ This page highlights the contributors to the project.
 
 📌 *The animation letter message * 
 
-![Animation page](https://youtube.com/shorts/LeHNj6pFvjs?feature=share)
- 
+[![Regarder la vidéo](https://img.youtube.com/vi/LeHNj6pFvjs/maxresdefault.jpg)](https://youtube.com/shorts/LeHNj6pFvjs?si=6EMLPTWFh7l90Wyw)
 
 
-📌 *The credits page with animations*  
+
+📌 *The credits page with animations* 
+
+![Credits page ](assets/credit_page.png)
+
 
 📌 *The animated logo * 
+
+[![Regarder la vidéo](https://img.youtube.com/vi/3D8NKy0GGIU/maxresdefault.jpg)](https://youtube.com/shorts/3D8NKy0GGIU)
 
 
 
