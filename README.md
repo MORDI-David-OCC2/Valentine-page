@@ -2,7 +2,7 @@
 
 ## 🌟 Presentation of the Projet 
 
-Secret Valentin is a platform that allows to send and view * secrets messages that can be unlocked with a password* . 
+Secret Valentin is a platform that allows to send and view *secrets messages that can be unlocked with a password* . 
 
 📩Each recipient can access their own message through their name and password
 
