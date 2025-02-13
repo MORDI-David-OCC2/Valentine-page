@@ -1,4 +1,9 @@
-window.emailjs.init("tBq9tvEuD9XKUu0XI");
+try {
+  window.emailjs.init("tBq9tvEuD9XKUu0XI"); // Ensure this is a valid ID
+} catch (error) {
+  console.warn("⚠️ EmailJS init failed, email sending will be disabled:", error);
+}
+
 
 export function sendEmail(recipient, email, message, password) {
   const templateParams = {
