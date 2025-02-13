@@ -1,32 +1,36 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { playCustomAnimation } from "./animations.js";
 import { sendEmail } from "./email.js";  // ✅ Import the email function
 
+let app;
+const firebaseConfig = {
+  apiKey: "AIzaSyBWRQcZeNMGcuB2I2eF6yKv3Nfx9_jXduY",
+  authDomain: "secret-valentine-d0646.firebaseapp.com",
+  databaseURL: "https://secret-valentine-d0646-default-rtdb.europe-west1.firebasedatabase.app/",
+  projectId: "secret-valentine-d0646",
+  storageBucket: "secret-valentine-d0646.appspot.com",
+  messagingSenderId: "597717292866",
+  appId: "1:597717292866:web:b8f905933ea7e973a7dadb",
+  measurementId: "G-0G4QJ69NPR"
+};
+try {
+  app = initializeApp(firebaseConfig);
+} catch (error) {
+  console.warn("⚠️ Firebase already initialized or failed:", error.message);
+  app = getApps()[0]; // Use existing app
+}
+
 const database = getDatabase();
 const availableAnimations = ["Djibril", "Emilie", "Fabien", "Rayan", "Ryu", "Ulysse", "Wiam"];
-const backgroundColors = {
-  "Djibril": "#047CA4",
-  "Fabien": "#047CA4",
-  "Rayan": "#047CA4", 
-  "Ulysse": "#047CA4",  
-  "default": "#14041C"
-};
-
 document.addEventListener("DOMContentLoaded", function() {
-  // Function to get URL parameters
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
   }
 
   const recipient = getQueryParam("recipient");
-
-  if (recipient) {
-    console.log(`🎨 Changing background for: ${recipient}`);
-
-    // Apply the recipient's background color or use default
-    document.body.style.backgroundColor = backgroundColors[recipient] || backgroundColors["default"];
-  }
+  const body = document.body;
 });
 
 // 📌 Handle message creation
@@ -52,7 +56,7 @@ document.getElementById('createMessageForm').addEventListener('submit', async fu
     });
 
     // 🎬 Play ACM.mp4 animation when a message is created
-    playCustomAnimation("Creation");
+    playCustomAnimation("Creation", "Message bien envoyé");
 
     // 📧 Send an email notification
     sendEmail(recipient, email, message, password);
@@ -61,6 +65,19 @@ document.getElementById('createMessageForm').addEventListener('submit', async fu
     console.error("❌ Erreur :", error);
     alert("❌ Une erreur est survenue lors de l'enregistrement.");
   }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("createMessageForm");
+
+  if (!form) {
+    console.error("❌ Form with id='createMessageForm' not found!");
+    return;
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    console.log("✅ Form submitted!");
+  });
 });
 
 // 📌 Handle message retrieval
