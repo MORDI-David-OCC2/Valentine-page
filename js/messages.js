@@ -45,7 +45,6 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
   
   const target = document.getElementById('target').value.trim();
   const passwordInput = document.getElementById('password').value.trim();
-  const messageDiv = document.getElementById('message');
 
   if (!target || !passwordInput) {
     alert("❌ Veuillez remplir tous les champs !");
@@ -65,19 +64,10 @@ document.getElementById('passwordForm').addEventListener('submit', async functio
     snapshot.forEach((messageSnapshot) => {
       const data = messageSnapshot.val();
       if (data.password === passwordInput) {
-        if (availableAnimations.includes(target)){
-        playCustomAnimation(target);
-        }
-        else {
-            playCustomAnimation("Creation");
-        }
-        setTimeout(() => {
-          messageDiv.innerHTML = `💌 ${data.message} 💌`;
-          messageDiv.style.display = 'block';
-        }, 3000);
-        
+        // 🔗 Redirect to new page before playing animation
+        window.location.href = `message.html?recipient=${encodeURIComponent(target)}&message=${encodeURIComponent(data.message)}`;
         messageFound = true;
-        return true;
+        return true; 
       }
     });
 
