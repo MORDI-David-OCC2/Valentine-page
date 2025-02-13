@@ -1,12 +1,12 @@
-export function playCustomAnimation(name) {
-  console.log(`Trying to play animation: ${name}`);
+export function playCustomAnimation(name, message) {
+  console.log(`Trying to play animation for: ${name}`);
 
-  // Get the video element
   const animationElement = document.getElementById("animationPlayer");
+  const messageDiv = document.getElementById("message");
 
-  if (!animationElement) {
-      console.error("❌ Animation element not found in the DOM!");
-      return;
+  if (!animationElement || !messageDiv) {
+    console.error("❌ Animation or message container not found!");
+    return;
   }
 
   const animationSources = {
@@ -21,23 +21,28 @@ export function playCustomAnimation(name) {
       Random: "assets/ACM.mp4"
   };
 
-  if (!animationSources[name]) {
-    animationElement.src = animationSources["Random"];
-    animationElement.load();  // Reload the video to apply new source
-    animationElement.play();
-    console.error(`❌ No animation found for: ${name}`);
-    return;
-  }
-
-  // Set the source of the video
-  animationElement.src = animationSources[name];
-  animationElement.style.display = "block"; // Show the video when it starts
-  animationElement.load();  // Reload the video to apply new source
+  // Select correct animation or use default
+  const videoSrc = animationSources[name] || animationSources["Random"];
+  animationElement.src = videoSrc;
+  animationElement.style.display = "block";
   animationElement.play().catch(error => console.error("❌ Error playing animation:", error));
 
-  // 🔹 Hide the animation when it finishes playing
+  // 🔹 When animation ends, hide it and show the message
   animationElement.onended = () => {
-    animationElement.style.display = 'none'; // ✅ Corrected line
-    console.log("✅ Animation finished, hiding the player.");
+    console.log("✅ Animation finished, replacing with message.");
+
+    // Fade out animation
+    animationElement.style.transition = "opacity 0.5s ease-out";
+    animationElement.style.opacity = "0";
+
+    // Wait for fade-out, then hide animation & show message
+    setTimeout(() => {
+      animationElement.style.display = "none"; // Hide video
+      animationElement.style.opacity = "1";   // Reset opacity
+
+      // 🔹 Show the message in the same place
+      messageDiv.innerHTML = `💌 ${message} 💌`;
+      messageDiv.style.display = "block";
+    }, 500);
   };
 }
