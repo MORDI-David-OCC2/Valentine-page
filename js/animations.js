@@ -1,4 +1,4 @@
-export function playCustomAnimation(name, message) {
+export function playCustomAnimation(name="Random", message=None) {
   console.log(`Trying to play animation for: ${name}`);
 
   const animationElement = document.getElementById("animationPlayer");
