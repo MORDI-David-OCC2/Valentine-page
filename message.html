@@ -4,35 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Message Secret</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* Center the container */
-    #messageContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh; /* Full screen height */
-      text-align: center;
-    }
-
-    /* Responsive Video */
-    #animationPlayer {
-      width: 90%; /* Take most of the screen width */
-      max-width: 600px; /* Avoids being too large on big screens */
-      height: auto; /* Maintain aspect ratio */
-      border-radius: 10px; /* Optional: rounded corners */
-    }
-
-    /* Style for the message */
-    #message {
-      font-size: 1.5rem;
-      color: #a80038;
-      font-family: 'Dancing Script', cursive;
-      display: none; /* Hidden until animation ends */
-      margin-top: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/messagestyles.css">
 </head>
 <body>
 
@@ -53,11 +25,28 @@
       return urlParams.get(param);
     }
 
+    // 🔹 Set background color based on recipient
+    function setBackgroundColor(recipient) {
+      const messageContainer = document.getElementById("messageContainer");
+      const backgroundColors = {
+        Djibril: "#047CA4",
+        Ulysse: "#047CA4",
+        Fabien: "#047CA4",
+        Rayan: "#047CA4"
+      };
+      
+      // Set specific color for known recipients or fallback to a general color
+      messageContainer.style.backgroundColor = backgroundColors[recipient] || "#14041C"; // Default color
+    }
+
     const recipient = getQueryParam("recipient");
     const message = getQueryParam("message");
 
     if (recipient && message) {
       console.log(`📩 Displaying message for: ${recipient}`);
+
+      // Set the background color based on the recipient
+      setBackgroundColor(recipient);
 
       // 🎬 Play animation & replace with message
       playCustomAnimation(recipient, message);
@@ -66,6 +55,7 @@
       document.getElementById("message").style.display = "block";
     }
   </script>
-<script type="module" src="./js/messages.js"></script>
+
+  <script type="module" src="./js/messages.js"></script>
 </body>
 </html>
