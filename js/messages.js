@@ -28,7 +28,7 @@ document.getElementById('createMessageForm').addEventListener('submit', async fu
     });
 
     // 🎬 Play ACM.mp4 animation when a message is created
-    playCustomAnimation("Creation");
+    playCustomAnimation("Random");
 
     // 📧 Send an email notification
     sendEmail(recipient, email, message, password);
