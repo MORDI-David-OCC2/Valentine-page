@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="module" src="js/animations.js"></script>
+    <script type="module">
+        import { playCustomAnimation } from "./js/animations.js";
+
+        // 📌 Get the parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipient = urlParams.get("recipient");
+        const message = urlParams.get("message");
+
+        if (!recipient || !message) {
+            document.getElementById("messageContainer").innerHTML = "❌ Erreur : Aucun message trouvé.";
+        } else {
+            document.getElementById("messageContainer").innerHTML = `💌 ${message} 💌`;
+
+            // 🎬 Play animation after redirection
+            setTimeout(() => {
+                playCustomAnimation(recipient);
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <video id="animationPlayer" autoplay muted loop>
+        <source id="animationSource" src="js/animations.js" type="video/mp4">
+    </video>    
+    <h1>Votre message</h1>
+    <div id="messageContainer">Chargement...</div>
+</body>
+</html>
