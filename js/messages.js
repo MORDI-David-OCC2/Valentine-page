@@ -4,6 +4,30 @@ import { sendEmail } from "./email.js";  // ✅ Import the email function
 
 const database = getDatabase();
 const availableAnimations = ["Djibril", "Emilie", "Fabien", "Rayan", "Ryu", "Ulysse", "Wiam"];
+const backgroundColors = {
+  "Djibril": "#047CA4",
+  "Fabien": "#047CA4",
+  "Rayan": "#047CA4", 
+  "Ulysse": "#047CA4",  
+  "default": "#14041C"
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to get URL parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  const recipient = getQueryParam("recipient");
+
+  if (recipient) {
+    console.log(`🎨 Changing background for: ${recipient}`);
+
+    // Apply the recipient's background color or use default
+    document.body.style.backgroundColor = backgroundColors[recipient] || backgroundColors["default"];
+  }
+});
 
 // 📌 Handle message creation
 document.getElementById('createMessageForm').addEventListener('submit', async function(event) {
@@ -28,7 +52,7 @@ document.getElementById('createMessageForm').addEventListener('submit', async fu
     });
 
     // 🎬 Play ACM.mp4 animation when a message is created
-    playCustomAnimation("Random");
+    playCustomAnimation("Creation");
 
     // 📧 Send an email notification
     sendEmail(recipient, email, message, password);
