@@ -25,13 +25,19 @@ export function playCustomAnimation(name) {
     animationElement.src = animationSources["Random"];
     animationElement.load();  // Reload the video to apply new source
     animationElement.play();
-      console.error(`❌ No animation found for: ${name}`);
-      return;
+    console.error(`❌ No animation found for: ${name}`);
+    return;
   }
 
   // Set the source of the video
   animationElement.src = animationSources[name];
+  animationElement.style.display = "block"; // Show the video when it starts
   animationElement.load();  // Reload the video to apply new source
-  animationElement.play();
-  console.log(`✅ Playing: ${animationSources[name]}`);
+  animationElement.play().catch(error => console.error("❌ Error playing animation:", error));
+
+  // 🔹 Hide the animation when it finishes playing
+  animationElement.onended = () => {
+    animationElement.style.display = 'none'; // ✅ Corrected line
+    console.log("✅ Animation finished, hiding the player.");
+  };
 }
