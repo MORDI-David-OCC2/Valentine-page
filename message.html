@@ -1,39 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script type="module" src="js/animations.js"></script>
-    <video id="animationPlayer" autoplay playsinline muted>
-        <source src="assets/ACM.mp4" type="video/mp4">
-      </video>      
-    <script type="module">
-        import { playCustomAnimation } from "./js/animations.js";
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Secret</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Center the container */
+    #messageContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* Full screen height */
+      text-align: center;
+    }
 
-        // 📌 Get the parameters from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const recipient = urlParams.get("recipient");
-        const message = urlParams.get("message");
+    /* Responsive Video */
+    #animationPlayer {
+      width: 90%; /* Take most of the screen width */
+      max-width: 600px; /* Avoids being too large on big screens */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 10px; /* Optional: rounded corners */
+    }
 
-        if (!recipient || !message) {
-            document.getElementById("messageContainer").innerHTML = "❌ Erreur : Aucun message trouvé.";
-        } else {
-            document.getElementById("messageContainer").innerHTML = `💌 ${message} 💌`;
-
-            // 🎬 Play animation after redirection
-            setTimeout(() => {
-                playCustomAnimation(recipient);
-            }, 250);
-        }
-    </script>
+    /* Style for the message */
+    #message {
+      font-size: 1.5rem;
+      color: #a80038;
+      font-family: 'Dancing Script', cursive;
+      display: none; /* Hidden until animation ends */
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <video id="animationPlayer" autoplay muted loop>
-        <source id="animationSource" src="js/animations.js" type="video/mp4">
-    </video>    
-    <h1>Votre message</h1>
-    <div id="messageContainer">Chargement...</div>
+
+  <div id="messageContainer">
+    <video id="animationPlayer" autoplay playsinline muted>
+      <source src="" type="video/mp4">
+      Votre navigateur ne supporte pas les vidéos.
+    </video>
+    <div id="message"></div>
+  </div>
+
+  <script type="module">
+    import { playCustomAnimation } from "./js/animations.js";
+
+    // 🔹 Function to get URL parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const recipient = getQueryParam("recipient");
+    const message = getQueryParam("message");
+
+    if (recipient && message) {
+      console.log(`📩 Displaying message for: ${recipient}`);
+
+      // 🎬 Play animation & replace with message
+      playCustomAnimation(recipient, message);
+    } else {
+      document.getElementById("message").innerHTML = "❌ Message introuvable.";
+      document.getElementById("message").style.display = "block";
+    }
+  </script>
+
 </body>
 </html>
