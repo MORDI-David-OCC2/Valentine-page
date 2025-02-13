@@ -7,6 +7,13 @@ body {
     position: relative;
   }
 
+  .bg-djibril { background-color: #047CA4; }
+.bg-fabien { background-color: #047CA4; }
+.bg-rayan { background-color: #047CA4; }
+.bg-ulysse { background-color: #047CA4; }
+.bg-default { background-color: #14041C; }
+
+
   .site-logo {
     width: 100px; /* Ajuste la taille selon tes besoins */
     height: auto;
