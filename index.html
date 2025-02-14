@@ -19,7 +19,7 @@
     <div class="steps">
       <div class="step">💌 <strong>Envoyer un message :</strong> Remplissez les informations avec le nom du destinataire, son mail, et votre message, puis définissez un mot de passe.</div>
       <div class="step">📩 <strong>Recevoir un email :</strong> Le destinataire reçoit un email contenant les instructions pour consulter son message.</div>
-      <div class="step">🔑 <strong>Consulter un message :</strong> Entrez votre nom (celui dans le mail) et votre mot de passe dans le formulaire de consultation.</div>
+      <div class="step">🔑 <strong>Consulter un message :</strong> Entrez vos identifiants dans le formulaire de consultation.</div>
     </div>
   </section>
     
@@ -43,11 +43,10 @@
   <div id="roseAnimation">🌹</div>
   <div id="message"></div>
   <div id="customAnimation" class="hidden">
-    <video id="animationVideo" width="400" height="300" autoplay>
+    <video id="animationVideo" width="400" height="300" autoplay loop muted playsinline>
       <source src="assets/ACM.mp4" type="video/mp4">
-    </video>
+    </video>    
   </div>
-  
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module" src="js/animations.js"></script>
   <script type="module" src="js/messages.js"></script>
