@@ -8,8 +8,10 @@
 </head>
 <body>
 
+  <div id="clickMessage" class="click-message">💌 Clique pour voir ton message ! 💌</div>
+
   <div id="messageContainer">
-    <video id="animationPlayer" playsinline>
+    <video id="animationPlayer" autoplay playsinline muted>
       <source src="./assets/ACM.mp4" type="video/mp4">
       Votre navigateur ne supporte pas les vidéos.
     </video>
@@ -19,13 +21,13 @@
   <script type="module">
     import { playCustomAnimation } from "./js/animations.js";
 
-    // 🔹 Function to get URL parameters
+    // 🔹 Get URL parameters
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
     }
 
-    // 🔹 Set background color based on recipient
+    // 🔹 Set background color
     function setBackgroundColor(recipient) {
       const messageContainer = document.getElementById("messageContainer");
       const backgroundColors = {
@@ -42,29 +44,50 @@
 
     if (recipient && message) {
       console.log(`📩 Displaying message for: ${recipient}`);
-
-      // Set the background color
       setBackgroundColor(recipient);
-
-      // 🎬 Play animation & replace with message
       playCustomAnimation(recipient, message);
     } else {
       document.getElementById("message").innerHTML = "❌ Message introuvable.";
       document.getElementById("message").style.display = "block";
     }
 
-    // 🎵 Enable sound on video after user interaction
+    // 🎵 Auto-unmute and hide the message after user clicks
     const video = document.getElementById("animationPlayer");
-    video.addEventListener("click", () => {
-      video.muted = false;  // Enable sound
-      video.play().then(() => {
-        console.log("🎵 Video with sound is playing.");
-      }).catch(error => {
-        console.error("❌ Video playback failed:", error);
-      });
-    });
+    const clickMessage = document.getElementById("clickMessage");
+
+    const unmuteVideo = () => {
+      video.muted = false;
+      video.play().catch(error => console.error("❌ Failed to play:", error));
+      clickMessage.style.display = "none";  // Hide the message
+      document.removeEventListener("click", unmuteVideo);
+    };
+
+    document.addEventListener("click", unmuteVideo); // Unmute on first click
   </script>
 
   <script type="module" src="./js/messages.js"></script>
+
+  <style>
+    .click-message {
+      background-color: rgba(255, 77, 109, 0.9);
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 10px;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 10px;
+      z-index: 1000;
+      animation: fadeInOut 5s infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+
 </body>
 </html>
