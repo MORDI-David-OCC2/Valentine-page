@@ -11,7 +11,7 @@
   <div id="clickMessage" class="click-message">💌 Clique pour voir ton message ! 💌</div>
 
   <div id="messageContainer">
-    <video id="animationPlayer" autoplay playsinline muted>
+    <video id="animationPlayer" playsinline>
       <source src="./assets/ACM.mp4" type="video/mp4">
       Votre navigateur ne supporte pas les vidéos.
     </video>
@@ -51,43 +51,23 @@
       document.getElementById("message").style.display = "block";
     }
 
-    // 🎵 Auto-unmute and hide the message after user clicks
+    // 🎵 Auto-play with sound and hide the message after user clicks
     const video = document.getElementById("animationPlayer");
     const clickMessage = document.getElementById("clickMessage");
 
-    const unmuteVideo = () => {
-      video.muted = false;
+    const playVideoWithSound = () => {
+      video.muted = false; // Unmute the video
       video.play().catch(error => console.error("❌ Failed to play:", error));
-      clickMessage.style.display = "none";  // Hide the message
-      document.removeEventListener("click", unmuteVideo);
+      clickMessage.style.display = "none";  // Hide the click message
+      document.removeEventListener("click", playVideoWithSound);
     };
 
-    document.addEventListener("click", unmuteVideo); // Unmute on first click
+    document.addEventListener("click", playVideoWithSound); // Play video with sound on first click
   </script>
 
   <script type="module" src="./js/messages.js"></script>
 
   <style>
     .click-message {
-      background-color: rgba(255, 77, 109, 0.9);
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      padding: 10px;
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 10px;
-      z-index: 1000;
-      animation: fadeInOut 5s infinite;
+      background-color: rgba(255, 77, 109, 0)
     }
-
-    @keyframes fadeInOut {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-  </style>
-
-</body>
-</html>
